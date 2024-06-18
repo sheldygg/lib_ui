@@ -5,6 +5,7 @@
 // https://github.com/desktop-app/legal/blob/master/LEGAL
 //
 #include "ui/platform/mac/ui_window_title_mac.h"
+#include "ui/platform/mac/ui_utillity_mac.h"
 
 #include "ui/platform/ui_platform_window_title.h"
 #include "ui/widgets/buttons.h"
@@ -141,11 +142,14 @@ void TitleWidget::resizeEvent(QResizeEvent *e) {
 
 void TitleWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 	const auto window = parentWidget();
-	if (window->windowState() == Qt::WindowMaximized) {
-		window->setWindowState(Qt::WindowNoState);
-	} else {
-		window->setWindowState(Qt::WindowMaximized);
-	}
+	if (event->button() == Qt::LeftButton) {
+        int action = getDoubleClickAction();
+        if (action == 1) {
+            showMaximized();
+        } else {
+            showMinimized();
+        }
+    }
 }
 
 } // namespace Platform

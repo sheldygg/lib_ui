@@ -170,5 +170,11 @@ void SetGeometryWithPossibleScreenChange(
 	widget->setGeometry(geometry);
 }
 
+extern "C" int getDoubleClickAction() {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger action = [defaults integerForKey:@"AppleActionOnDoubleClick"];
+    return (int)action;
+}
+
 } // namespace Platform
 } // namespace Ui
